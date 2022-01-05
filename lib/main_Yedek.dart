@@ -54,12 +54,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () {
                 yayin();
-                _streamController.stream.listen((event) async{
-                 await print(event);
+                _streamController.stream.listen((event) {
+                  print(event);
                   setState(() {
                     number=event;
                   });
                 });
+
               },
               child: Text('Yayin'),
             ),
@@ -67,16 +68,12 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 20,
             ),
             ElevatedButton(
-              onPressed: () async{
+              onPressed: (){
                 yayin();
-              final Future<List> liste=_streamController.stream.toList();
+                final Future<List> liste=_streamController.stream.toList();
                 //var liste=_streamController.stream.toList();
-                liste.whenComplete(() => print('liste olustu.'));
-              liste.then((value) => print(value.length));
-                liste.then((value) => print(value.first));
-                liste.then((value) => print(value.reversed)); //  (4, 3, 2, 1, 0)
-                liste.then((value) => print(value)); //  [0, 1, 2, 3, 4]
-              //print(liste.runtimeType);
+                liste.then((value) => print(value));
+                print(liste.runtimeType);
               },
               child: Text('Liste'),
             ),
@@ -85,16 +82,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          yayin();
           print('yayın');
           _streamController.stream.listen((event) {
             print(event);
-          },
-            onDone:() async{
-              await Future.delayed(Duration(seconds: 3));
-           print('yayin bitti');
-               },
-          );
+          });
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
